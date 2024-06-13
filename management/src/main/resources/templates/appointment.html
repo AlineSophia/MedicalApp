@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Patient Management System</title>
+	<!-- Latest compiled and minified CSS -->
+	<link th:href="@{/style.css}" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<script type="text/javascript" th:src="@{/script.js}"></script>
+
+	<style>
+		.box {
+			float: left;
+			height: 20px;
+			width: 20px;
+			margin-bottom: 15px;
+			border: 1px solid black;
+			clear: both;
+		}
+
+		.item-button {
+			margin: 5px;
+			padding: 10px;
+			background-color: #80ffd4;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+
+		.item-button:hover {
+			background-color: #45a049;
+		}
+		
+		.item-button.clicked {
+			background-colour: #ff6347;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="header">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li style="float:right" sec:authorize="isAuthenticated()"><a class="active" th:href="@{/logout}">Logout</a>
+			</li>
+		</ul>
+	</div>
+	<div class="row">
+		<div class="column left">
+			<div class="middel">
+				<div>
+					<ul>
+						<br>
+						<li style="text-align:center;"><h1>Options</h1></li>
+						<li><a th:href="@{/appointment/available}">View Available Appointment Slot</a></li>
+						<li><a th:href="@{/doctor/details}">Doctor Details</a></li>
+						<li><a th:href="@{/medication/list}">Medication Management</a></li>
+						<li><a th:href="@{/schedule/user}">Schedule</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="column right">
+			<div class="container1">
+				<h1>Book an Appointment</h1>
+				<br>
+				<form id="itemForm" action="/appointment/bookAppointment" method="post" th:object="${appointment}">
+
+					<div class="form-group">
+						<label for="doctorId">Select Doctor:</label>
+						<select id="doctorId" name="doctorId">
+							<option value="0">Pick a Doctor</option>
+							<option th:each="i : ${doctorList}" th:value="${i.id}"
+								th:text="${i.firstName} + ' ' + ${i.lastName}">
+							</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Medical Concern:</label>
+						<textarea th:field="${appointment.comments}" />
+					</div>
+					<div class="form-group">
+						<label>Pick up the Date:</label>
+						<input type="date" th:value="${#temporals.format(localDate, 'dd-MM-yyyy')}"
+							th:field="${appointment.appointmentDate}" id="appointmentDate" />
+						<br><br>
+						<input type="button" style="background-color:lightblue;border:none;padding:5px"
+							onclick="myFunction()" value="Slot Selection" />
+					</div>
+					<div class="slot" id="slot">
+						</div>
+							<div class="form-group">
+										<button type="submit" class="form-control btn btn-primary">Book
+											Appointment</button>
+							</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	</div>
+</body>
+
+</html>

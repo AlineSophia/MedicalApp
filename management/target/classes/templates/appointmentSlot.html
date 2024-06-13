@@ -1,0 +1,39 @@
+<div id="second" th:if="${appointmentSlotList} == null">
+	<label for="demo">Pick the time slot:</label>
+	<div>
+	<input type="hidden" id="selectedItems" name="time_slots">
+		<button type="button" class="item-button" id="item-button1" onclick="addItem('1')">10.00 am</button>
+		<button type="button" class="item-button" id="item-button2" onclick="addItem('2')">11.00 am</button>
+		<button type="button" class="item-button" id="item-button3" onclick="addItem('3')">12.00 pm</button>
+		<button type="button" class="item-button" id="item-button4" onclick="addItem('4')">1.00 pm</button>
+		<button type="button" class="item-button" id="item-button5" onclick="addItem('5')">2.00 pm</button>
+		<button type="button" class="item-button" id="item-button6" onclick="addItem('6')">3.00 pm</button>
+		<button type="button" class="item-button" id="item-button7" onclick="addItem('7')">4.00 pm</button>
+		<button type="button" class="item-button" id="item-button8" onclick="addItem('8')">5.00 pm</button>
+		<button type="button" class="item-button" id="item-button9" onclick="addItem('9')">6.00 pm</button>
+		</div>
+</div>
+
+<div id="first" th:if="${appointmentSlotList != null}">
+	<label for="demo">Pick the time slot:</label>
+		<input type="hidden" id="selectedItems" name="time_slots">
+		<div th:each="appointmentSlotList: ${appointmentSlotList}">
+			<button type="button" th:unless="${appointmentSlotList.slot.id == 1}" class="item-button" id="item-button1" onclick="addItem('1')">10.00 am</button>
+			<button type="button" th:unless="${appointmentSlotList.slot.id == 2}" class="item-button" id="item-button2" onclick="addItem('2')">11.00 am</button>
+			<button type="button" th:unless="${appointmentSlotList.slot.id == 3}" class="item-button" id="item-button3" onclick="addItem('3')">12.00 pm</button>
+			<button type="button" th:unless="${appointmentSlotList.slot.id == 4}" class="item-button" id="item-button4" onclick="addItem('4')">1.00 pm</button>
+			<button type="button" th:unless="${appointmentSlotList.slot.id == 5}" class="item-button" id="item-button5" onclick="addItem('5')">2.00 pm</button>
+			<button type="button" th:unless="${appointmentSlotList.slot.id == 6}" class="item-button" id="item-button6" onclick="addItem('6')">3.00 pm</button>
+			<button type="button" th:unless="${appointmentSlotList.slot.id == 7}" class="item-button" id="item-button7" onclick="addItem('7')">4.00 pm</button>
+			<button type="button" th:unless="${appointmentSlotList.slot.id == 8}" class="item-button" id="item-button8" onclick="addItem('8')">5.00 pm</button>
+			<button type="button" th:unless="${appointmentSlotList.slot.id == 9}" class="item-button" id="item-button9" onclick="addItem('9')">6.00 pm</button>
+		</div>
+		</div>
+</div>
+	<!--			
+<div>
+    <button type="submit" class="button" style="background-color:lightblue;border:none;padding:5px">Book Appointment</button>
+</div>-->
+				
+				
+			
